@@ -112,4 +112,31 @@ class LinkedList:
             temp = ptr
             ptr = ptr.next
         
+    def extend(self,List2):
+        ptr = self.head
+        if self.head==None:
+            self.head = List2.head
+            self.Length = List2.Length
+            return
         
+        while ptr.next!=None:
+            ptr = ptr.next
+        ptr.next = List2.head
+        self.Length +=List2.Length
+
+    def revese(self):
+        prev = None
+        current = self.head
+        next = None
+        while current!=None:
+            next = current.next
+            current.next = prev
+            prev = current
+            current = next
+        self.head = prev
+
+
+
+    def middle(self):
+        pass
+
