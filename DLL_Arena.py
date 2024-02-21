@@ -10,10 +10,7 @@ DLL1.insert_at_end(30)
 DLL1.print()
 print(DLL1.Length)
 
-
-DLL1.remove_at_begining()
-DLL1.remove_at_end()
-DLL1.remove_at_end()
+DLL1.insert_at(3,123)
 DLL1.print()
 print(DLL1.Length)
 
