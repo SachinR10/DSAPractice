@@ -97,16 +97,24 @@ class DoublyLinkedList:
         if index<0 or index>=self.Length:
             print("Invalid index")
             return
-        if self.Length==1:
-            self.head = None
-            self.Length = 0
+        if index==0:
+            self.head = self.head.next
+            self.Length -=1
+            return
+        if index == self.Length-1:
+            ptr = self.head
+            while ptr.next!=None:
+                ptr = ptr.next
+            ptr.prev.next = None
+            ptr.prev = None
+            self.Length -=1
             return
         else:
-            count = index-1
+            count = 0
             ptr = self.head
-            while count!=0:
+            while count!=index-1:
                 ptr = ptr.next
-                count -=1
+                count +=1
             temp = ptr.next
             ptr.next = ptr.next.next
             temp.next.prev = ptr
@@ -115,7 +123,47 @@ class DoublyLinkedList:
             self.Length -=1
             return
         
-        
-
     def extend(self,list2):
-        pass
+        if self.Length==0:
+            self.head = list2.head
+            self.Length = list2.Length
+            return
+        if list2.Length==0:
+            return
+        ptr = self.head
+
+        while ptr.next!=None:
+            ptr = ptr.next
+        ptr.next = list2.head
+        list2.head.prev = ptr
+        self.Length += list2.Length
+        return
+    
+    def remove_value(self,value):
+        if self.Length==0:
+            return "Doubly linked list is empty"
+        
+        if self.head.value == value:
+            self.head = self.head.next
+            if self.head!=None:
+                self.head.prev = None
+            self.Length -=1
+            return 1
+        ptr = self.head
+        while ptr.next!=None:
+            if ptr.value == value:
+                ptr.prev.next = ptr.next
+                ptr.next.prev = ptr.prev
+                ptr.next = None
+                ptr.prev = None
+                self.Length -=1
+                return "Element found and removed successfuly!"
+            ptr = ptr.next
+        
+        if ptr.value == value:
+            ptr.prev.next = None
+            ptr.prev = None
+            self.Length -=1
+            return 1
+        return "No node found with same value!"
+            
