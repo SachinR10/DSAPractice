@@ -1,4 +1,5 @@
 class BinarySearchTree:
+    
     def __init__(self,data):
         self.data = data
         self.left = None
@@ -30,14 +31,36 @@ class BinarySearchTree:
             return self.data
         else:
             return self.right.get_max()
-
+    # Inorder - Left Root Right
     def inorder_traversal(self):
-        pass
-
+        InOrder = []
+        if self.left!=None:
+            InOrder +=self.left.inorder_traversal()
+        InOrder.append(self.data)
+        if self.right!=None:
+            InOrder+=self.right.inorder_traversal()
+        return InOrder
+    
+    #Pre order - Root Left Right
     def preorder_traversal(self):
-        pass
+        PreOrder = []
+        PreOrder.append(self.data)
+        if self.left!=None:
+            PreOrder += self.left.preorder_traversal()
+        if self.right!=None:
+            PreOrder += self.right.preorder_traversal()
+        return PreOrder
+
+    #Post Order - Left Right Root
     def postorder_traversal(self):
-        pass
+        PostOrder = []
+        if self.left!=None:
+            PostOrder += self.left.postorder_traversal()
+        if self.right!=None:
+            PostOrder += self.right.postorder_traversal()
+        PostOrder.append(self.data)
+        return PostOrder
+
 
     def is_pressent(self,val):
         if self.data == val:
